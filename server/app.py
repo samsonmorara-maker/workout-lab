@@ -12,8 +12,10 @@ migrate = Migrate(app, db)
 
 db.init_app(app)
 
+from server import routes
 
 if __name__ == "__main__":
-    app.run(port=3000, debug=True)
+    app.run(port=5000, debug=True)
+
 
 
