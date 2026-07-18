@@ -1,0 +1,3 @@
+# WORKOUT TRACKER
+The Workout Tracker  is a Flask backend application that allows personal trainers to create workouts, manage reusable exercises, and associate exercises with workouts. Each exercise can be used in multiple workouts, while each workout can contain multiple exercises with workout-specific details such as sets, reps, and duration.
+The application is built using Flask, SQLAlchemy, Marshmallow, and Flask-Migrate, with SQLite as the database.

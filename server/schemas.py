@@ -1,10 +1,12 @@
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
-from marshmallow import fields, validate
+from marshmallow import fields, validate, auto_field
 
 from server.models import Exercise, Workout, WorkoutExercise
 
 
 class ExerciseSchema(SQLAlchemyAutoSchema):
+    name = auto_field(validate=validate.Length(min=3))
+    category = auto_field(validate=validate.Length(min=3))
     class Meta:
         model = Exercise
         include_relationships = True
@@ -12,6 +14,7 @@ class ExerciseSchema(SQLAlchemyAutoSchema):
 
 
 class WorkoutSchema(SQLAlchemyAutoSchema):
+    duration_minutes = auto_field(validate=validate.Range(min=1))
     class Meta:
         model = Workout
         include_relationships = True
@@ -19,6 +22,10 @@ class WorkoutSchema(SQLAlchemyAutoSchema):
 
 
 class WorkoutExerciseSchema(SQLAlchemyAutoSchema):
+    sets = auto_field(validate=validate.Range(min=1))
+
+    reps = auto_field(validate=validate.Range(min=0))
+    duration_seconds = auto_field(validate=validate.Range(min=0))   
     class Meta:
         model = WorkoutExercise
         include_relationships = True
@@ -29,5 +36,5 @@ exercises_schema = ExerciseSchema(many=True)
 workout_schema = WorkoutSchema()
 workouts_schema = WorkoutSchema(many=True)
 
-workout_xercise_schema = WorkoutExerciseSchema()
+workout_exercise_schema = WorkoutExerciseSchema()
 workout_exercises_schema = WorkoutExerciseSchema(many=True)
